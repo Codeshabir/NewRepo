@@ -144,23 +144,6 @@
 
 
 
-                    @if (!string.IsNullOrEmpty(ViewBag.SuccessMessage))
-                    {
-                        <script>
-                            // Show JavaScript alert
-                            alert('@Html.Raw(ViewBag.SuccessMessage)');
-                        </script>
-                    }
-
-                    @if (!string.IsNullOrEmpty(TempData["ErrorMessage"] as string))
-                    {
-                        <script>
-                            // Show JavaScript alert for error
-                            alert('@Html.Raw(TempData["ErrorMessage"])');
-                        </script>
-                    }
-
-
 
               <div class="row">
                 <div class="col-lg-6 p-0">
@@ -305,7 +288,7 @@
                       No setup, monthly, or hidden fees
                     </li>
                     <li class="list-group-item text-uppercase">
-                                        <a href="@Url.Action("CreateCheckoutSession","Home" , new{package = "Free Plan",  amount = 0 })" class="btn btn-primary subscribe-btn">Subscribe Now</a>
+                                        <a href="@Url.Action("SubscribePackage","Home" , new{package = "Free Plan",  amount = 0 })" class="btn btn-primary subscribe-btn">Subscribe Now</a>
                                     </li>
                   </ul>
                 </div>
@@ -328,7 +311,7 @@
                       No setup, monthly, or hidden fees
                     </li>
                     <li class="list-group-item text-uppercase">
-                                        <a href="@Url.Action("CreateCheckoutSession","Home" , new{package = "Monthly Plan",  amount = 5.99 })" class="btn btn-primary subscribe-btn">Subscribe Now</a>
+                                        <a href="@Url.Action("SubscribePackage","Home" , new{package = "Monthly Plan",  amount = 5.99 })" class="btn btn-primary subscribe-btn">Subscribe Now</a>
                                     </li>
                   </ul>
                 </div>
@@ -472,18 +455,20 @@
 
         <!-- Contact Form -->
         <div class="row" id="contactUs">
+
           <div class="col-md-6">
             <div class="contact-form">
               <!-- <div class="backdrop"></div> -->
-              <form action="">
-                <div class="row">
+                            <div class="row">
+                                                        <form asp-action="SendMessage" method="post">
+
                   <div class="col-md-6 mb-2 mb-md-0">
                     <div class="form-group">
                       <input
                         type="text"
                         class="form-control text-white bg-dark shadow-none"
-                        id=""
-                        name=""
+                                                   id="name"
+                                                   name="name"
                         placeholder="Your Name"
                       />
                     </div>
@@ -492,20 +477,19 @@
                     <input
                       type="email"
                       class="form-control text-white bg-dark shadow-none"
-                      id=""
-                      name=""
+                                               id="email"
+                                               name="email"
                       placeholder="Your Email"
                     />
                   </div>
                   <div class="col-12 mt-4">
-                    <textarea name="" id="" cols="5" rows="10" class="form-control text-white bg-dark" placeholder="Your Message..."></textarea>
+                                        <textarea name="message" id="message" cols="5" rows="10" class="form-control text-white bg-dark" placeholder="Your Message..."></textarea>
                   </div>
                   <div class="col-md-12">
-                    <button type="button" class="video-btn mt-4 ms-0" style="z-index:5">Send Message Now</button>
+                    <button type="submit" class="video-btn mt-4 ms-0" style="z-index:5">Send Message Now</button>
                   </div>
-
+                  </form>
                 </div>
-              </form>
 
             </div>
           </div>

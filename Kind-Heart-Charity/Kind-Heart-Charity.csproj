@@ -13,10 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Remove="Views\Shared\_CkeditorScriptPartial.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.20" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.20" />
     <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
@@ -37,7 +33,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.editorconfig" />
-    <None Include="Views\Shared\_CkeditorScriptPartial.cshtml" />
     <None Include="wwwroot\ckeditor5-build-classic\ckeditor.js" />
     <None Include="wwwroot\ckeditor5-build-classic\ckeditor.js.map" />
     <None Include="wwwroot\ckeditor5-build-classic\LICENSE.md" />

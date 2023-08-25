@@ -10,6 +10,8 @@ using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Kind_Heart_Charity.Models.Mailing;
 using System.Text;
+using System.Net.Mail;
+using System.Net;
 
 namespace Kind_Heart_Charity.Controllers
 {
@@ -27,9 +29,9 @@ namespace Kind_Heart_Charity.Controllers
         public IActionResult Index()
         {
             List<DynamicPagesDBDTO> data = new List<DynamicPagesDBDTO>();
-            _context.DynamicPages.Where(x=>x.IsDeleted==false).ToList().ForEach(x => data.Add(new DynamicPagesDBDTO() { Id = x.Id, PageName = x.PageName, TotalRecords = 0, SectionName = x.SectionName }));
+            _context.DynamicPages.Where(x => x.IsDeleted == false).ToList().ForEach(x => data.Add(new DynamicPagesDBDTO() { Id = x.Id, PageName = x.PageName, TotalRecords = 0, SectionName = x.SectionName }));
             ViewBag.AllPages = data;
-            var SectionName = data.GroupBy(x => x.SectionName).Select(x=>x.Key);
+            var SectionName = data.GroupBy(x => x.SectionName).Select(x => x.Key);
             ViewBag.SectionName = SectionName;
             var categories = _context.Categories.ToList();
 
@@ -56,12 +58,12 @@ namespace Kind_Heart_Charity.Controllers
                 TempData["SuccessMessage"] = "Your email has been successfully added to our mailing list!";
             }
 
-            return RedirectToAction("Index"); 
+            return RedirectToAction("Index");
         }
 
         public IActionResult DownloadEmails()
         {
-            var mailingList = _context.MailingLists.ToList(); 
+            var mailingList = _context.MailingLists.ToList();
             var stringBuilder = new StringBuilder();
 
             foreach (var item in mailingList)
@@ -79,7 +81,7 @@ namespace Kind_Heart_Charity.Controllers
 
         string DomainName = "https://localhost:8080/Home/", sessionId;
 
-   
+
         public IActionResult SubscribePackage(string package, decimal? amount)
         {
             StripeConfiguration.ApiKey = "sk_test_51N6bLAHOKzeMSUnWfEjZk3rYbqrwBCjmkRsCYtbnv3CjqNuZuCyVJvR6ZDtgTJIcmJcZprkV6HC2KQz6lW2xGrYZ00h6QMSO3T";
@@ -156,7 +158,44 @@ namespace Kind_Heart_Charity.Controllers
         }
 
 
+        [HttpPost]
+        public async Task<IActionResult> SendMessage(string name, string email, string message)
+        {
+            // Configure your Gmail account
+            string gmailUsername = "shabirhussain.6122@gmail.com";
+            string gmailPassword = "Mandhwani536@";
+
+            // Set up the SMTP client
+            var smtpClient = new SmtpClient("smtp.gmail.com")
+            {
+                Port = 587,
+                Credentials = new NetworkCredential(gmailUsername, gmailPassword),
+                EnableSsl = true, // Use SSL
+            };
+
+            // Compose the email
+            var mailMessage = new MailMessage(email, "shabirhussain.6122@gmail.com")
+            {
+                Subject = "New Message from Contact Form",
+                Body = $"Name: {name}\nEmail: {email}\nMessage:\n{message}",
+            };
+
+            try
+            {
+                // Send the email
+                await smtpClient.SendMailAsync(mailMessage);
+                return RedirectToAction("Index", "Home"); // Redirect to a success page
+            }
+            catch
+            {
+                // Handle errors and redirect to an error page
+                return RedirectToAction("Error", "Home");
+            }
 
 
+
+
+
+        }
     }
 }
