@@ -82,7 +82,7 @@ namespace Kind_Heart_Charity.Controllers
    
         public IActionResult SubscribePackage(string package, decimal? amount)
         {
-            StripeConfiguration.ApiKey = "pk_test_51NgBVDEPVS0RJPUBohOFyQV7fTs2tRygkG4HtHy5p3i1PJdoZQsLn7LL7LQT0NMdj2gn4d6An6EZhtarxKIggkW200HUFymLLe";
+            StripeConfiguration.ApiKey = "sk_test_51N6bLAHOKzeMSUnWfEjZk3rYbqrwBCjmkRsCYtbnv3CjqNuZuCyVJvR6ZDtgTJIcmJcZprkV6HC2KQz6lW2xGrYZ00h6QMSO3T";
 
             string username = User.Identity.Name;
             DateTime currentDate = DateTime.Now;
@@ -92,7 +92,7 @@ namespace Kind_Heart_Charity.Controllers
                 Currency = "usd",
                 ProductData = new PriceProductDataOptions
                 {
-                    Name = username
+                    Name = "abc"
                 }
             };
 
