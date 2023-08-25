@@ -1,0 +1,119 @@
+﻿@model (Kind_Heart_Charity.Models.PagePost,List<Kind_Heart_Charity.Models.PostGalleryImages>);
+@{
+    ViewBag.Title = "DynamicPages";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+	<style>
+	    *{
+	        font-family:Arial, Helvetica, sans-serif;
+	    }
+		/* Header */
+		header {
+			background-color: #7b0781;
+			color: #fff;
+			padding: 20px;
+			text-align: center;
+			font-weight:900;
+			width:100%
+		}
+
+		h1 {
+			margin: 0;
+		}
+
+		/* Content */
+	/*	.container {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+			padding: 20px;
+		}*/
+
+		.column {
+			flex: 33.33%;
+			padding: 10px;
+			box-sizing: border-box;
+		}
+
+		p {
+			line-height: 1.5;
+			margin-bottom: 20px;
+		}
+
+		/* Gallery */
+		.gallery {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+			padding: 20px;
+		}
+
+		.gallery-item {
+			flex: 33.33%;
+			padding: 10px;
+			box-sizing: border-box;
+			position: relative;
+			overflow: hidden;
+			object-fit: cover;
+		}
+
+		.gallery-item img {
+			max-width: 100%;
+			transition: transform 0.5s;
+		}
+
+		.gallery-item:hover img {
+			transform: scale(1.2);
+		}
+
+		.gallery-item .overlay {
+			background-color: rgba(0,0,0,0.5);
+			color: #fff;
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			opacity: 0;
+			transition: opacity 0.5s;
+			cursor: pointer;
+		}
+
+		.gallery-item:hover .overlay {
+			opacity: 1;
+		}
+
+		.gallery-item .overlay p {
+			margin: 0;
+			font-size: 1.5rem;
+			text-align: center;
+		}
+	</style>
+
+	<!-- Header -->
+	<header>
+		<h1>@Model.Item1.PostTitle</h1>
+	</header>
+<!-- Gallery -->
+<div class="gallery">
+	@{
+		foreach (var item in Model.Item2)
+		{
+			<div class="gallery-item">
+				<img src=@item.ImagePath alt="Gallery Item 1">
+			</div>
+		}
+	}
+
+</div>
+	<!-- Content -->
+	<div class="container">
+		@Html.Raw(Model.Item1.PostDescription)
+	</div>
+
+	

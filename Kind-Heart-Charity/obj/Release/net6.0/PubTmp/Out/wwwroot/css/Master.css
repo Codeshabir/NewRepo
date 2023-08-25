@@ -1,0 +1,138 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+.headerbrand {
+    background-color: #c7c7c9;
+}
+
+.headerbrand .search {
+    border: 2px solid #7b0781;
+    border-radius: 20px;
+    padding: 5px;
+}
+
+.headerbrand .search input {
+    background-color: #c7c7c9;
+    border: none;
+}
+
+.headerbrand .search .button {
+    background-color: #7b0781;
+    border: none;
+    color: white;
+    border-radius: 10px;
+}
+
+.headerbrand .login .button {
+    background-color: #7b0781;
+    border: none;
+    height: 50px;
+    width: 100px;
+    color: white;
+    border-radius: 10px;
+}
+
+.headerbrand .cart a {
+    border: none;
+    height: 50px;
+    font-size: 30px;
+    color: #7b0781;
+    float: right;
+    margin-right: 10px;
+    border-radius: 10px;
+}
+
+nav {
+    background-color: #c7c7c9!important;
+}
+
+.navbar .button {
+    background-color: #7b0781;
+    border: none;
+    height: 50px;
+    width: 100px;
+    color: white;
+    border-radius: 10px;
+}
+
+
+footer {
+    background-color: #c7c7c9;
+}
+
+
+.card {
+    width: 50%;
+    margin: auto;
+    overflow-x: hidden;
+  }
+  
+.card p {
+    color: #7b0781;
+    animation-name: rightToLeft;
+    animation-duration: 15s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    /* animation: rightToLeft 4.5s linear infinite; */
+  }
+  
+  @keyframes rightToLeft {
+    0% {
+      transform: translateX(50%);
+    }
+    100% {
+      transform: translateX(-110%);
+    }
+  }
+
+  .welcome h1 {
+    color: #7b0781;
+    font-weight: 900;
+    font-size: 50px;
+  }
+
+  .welcome h4 {
+    color: #7b0781;
+    font-weight: 100;
+    font-size: 35px;
+  }
+
+  .welcome li {
+    color: rgb(63, 63, 63);
+    font-weight: 100;
+    font-size: 20px;
+  }
+
+.service h1 {
+    color: #7b0781;
+    font-weight: 600;
+    font-size: 50px;
+}
+
+.service ul {
+    display: inline-flex;
+    list-style: none;
+}
+
+.service ul li {
+    background-color: #7b0781;
+    opacity: 0.8;
+    width: 20%;
+    height: 30px;
+    color: white;
+    border: 1px solid white;
+    text-align: center;
+}
+
+.service ul li button {
+    background-color: #7b0781;
+    color: white;
+    border: none;
+    width: 100%;
+    text-align: center;
+}

@@ -1,0 +1,132 @@
+﻿@model List<ProductViewModel>
+
+@{
+    ViewBag.Title = "DynamicPages";
+    Layout = "~/Views/Shared/Navbar.cshtml";
+}
+
+
+
+
+<div class="container-fluid">
+    <button class="btn btn-primary" onclick="CheckoutCart()">Checkout</button>
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    @if (item.Images.Any())
+                    {
+                        <img class="card-img-top" src="@item.Images.First().ImagePath" alt="Card image cap" style="height: 200px;">
+                    }
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Name</h5>
+                        <p class="card-text"><small class="text-muted">Cost: @item.Price</small></p>
+                    </div>
+                    <div class="card-footer d-flex align-items-center">
+                        <div class="quantity">
+                            <button class="btn btn-secondary" onclick="decreaseQuantity(@item.Id)">-</button>
+                            <input class="form-control mx-2" type="number" min="1" max="10" value="1" id="quantity_@item.Id">
+                            <button class="btn btn-secondary" onclick="increaseQuantity(@item.Id)">+</button>
+                        </div>
+                        <button class="btn btn-primary mr-2" onclick="AddToCart(@item.Id, @item.Price)">Add to Cart</button>
+                        <a class="btn btn-success" href='@Url.Action("ProductDetail", "Product", new { id = item.Id })'>Detail</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+<script>
+    // JavaScript functions to handle quantity changes
+    function decreaseQuantity(id) {
+        //var quantityInput = document.querySelector('.quantity input[type="number"]');
+        var quantityInput = $('#quantity_'+id).val();
+        //var currentValue = parseInt(quantityInput.value);
+        var currentValue = parseInt(quantityInput);
+        if (currentValue > 1) {
+            //quantityInput.value = currentValue - 1;
+            $('#quantity_' + id).val(currentValue - 1);
+        }
+    }
+
+    function increaseQuantity(id) {
+        //var quantityInput = document.querySelector('.quantity input[type="number"]');
+        var quantityInput = $('#quantity_' + id).val();
+        //var currentValue = parseInt(quantityInput.value);
+        var currentValue = parseInt(quantityInput);
+        if (currentValue < 10) {
+            //quantityInput.value = currentValue + 1;
+            $('#quantity_' + id).val(currentValue + 1);
+        }
+    }
+    function AddToCart(id, productPrice) {
+        var currentValue = parseInt($('#quantity_' + id).val());
+        var uri = "/Product/AddToCart?productId=" + id + "&quantity=" + currentValue + "&price=" + productPrice;
+        $.ajax({
+            url: uri,
+            type: "GET",
+            dataType: "JSON",
+            success: function (response) {
+                console.log(response.shoppinglist);
+                if (response.status) {
+                    $('#ProductCount').html('Order price (' + response.message + ')');
+                    $("#CartItems").empty();
+                    if (response.shoppinglist && response.shoppinglist.length > 0) {
+                        response.shoppinglist.forEach((element, index, array) => {
+                            $("#CartItems").append(" <li><a class='dropdown-item'>" + "(" + element.quantity + " X " + element.pricePerUnit + " = " + element.productPrice + ") " + "</a></li>");
+                        });
+                    }
+                } else {
+                    // Handle error case
+                }
+                $('#addnew').modal('hide');
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    }
+
+    function CheckoutCart() {
+        var uri = "/Product/CheckoutOrder";
+        $.ajax({
+            url: uri,
+            type: "GET",
+            dataType: "JSON",
+            success: function (response) {
+                if (response.status) {
+                    window.location.href = response.redirectUrl;
+                } else {
+                    $("#CartItems").empty();
+                    if (response.shoppinglist && response.shoppinglist.length > 0) {
+                        response.shoppinglist.forEach((element) => {
+                            $("#CartItems").append("<li><a class='dropdown-item'>"  + "(" + element.quantity + " X " + element.pricePerUnit + " = " + element.productPrice + ") " + "</a></li>");
+                        });
+                    }
+                }
+                $('#addnew').modal('hide');
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    }
+
+
+
+</script>
+
+
+
+
+   

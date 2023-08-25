@@ -1,0 +1,304 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- CSS FILES -->
+
+
+</head>
+<body>
+   @* <section class="container">
+        <div class="card m-3 w-50 mx-auto shadow-lg rounded">
+            <p class="slide-in-left">
+                @if (TempData.ContainsKey("FirstThreeEventTitles"))
+                {
+                    string[] firstThreeEventTitles = (string[])TempData["FirstThreeEventTitles"];
+                    foreach (string title in firstThreeEventTitles)
+                    {
+                        <h3>@title</h3>
+                    }
+                }
+            </p>
+        </div>
+    </section>*@
+    <section class="container welcome">
+        <div class="row ">
+            <div class="col-md-6">
+                <img class="img-fluid" src="https://myhealthnet.uk/wp-content/uploads/2023/01/Experts-rafiki-purple.webp" />
+            </div>
+            <div class="col-md-6 justify-content-center align-self-center">
+                <h1>Welcome to <br> MyHealthnet.</h1>
+                <h4>Youth health & Well-Being Service</h4>
+                <li>Providing Free Health and Well-Being Advice;</li>
+                <li>Providing Confidential Counselling Service;</li>
+                <li>Providing Direct Health Promotional Activities.</li>
+            </div>
+        </div>
+    </section>
+
+    <section class="container service mt-5">
+        <h1 class="text-center">Services</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card w-75">
+                    <div class="row">
+                        <ul>
+                            <li><button type="button" id="btn1" onclick="myFunction(this)">btn1</button></li>
+                            <li><button type="button" id="btn2" onclick="myFunction1(this)">btn2</button></li>
+                            <li><button type="button" id="btn3" onclick="myFunction2(this)">btn3</button></li>
+                            <li><button type="button" id="btn4" onclick="myFunction3(this)">btn4</button></li>
+                            <li><button type="button" id="btn5" onclick="myFunction4(this)">btn5</button></li>
+                        </ul>
+                    </div>
+                    <div class="row">
+                        <img src="~/images/charity-27.jpg" height="200px" />
+                        <span id="ServiceContent">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minima neque voluptatibus debitis officiis amet asperiores, doloribus ut dicta delectus. In dolorem aspernatur voluptatem sunt et, magnam nemo est autem dignissimos.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <img class="img-fluid" src="https://myhealthnet.uk/wp-content/uploads/2023/01/Online-Doctor-amico.webp" />
+            </div>
+        </div>
+    </section>
+
+    <section class="service mb-3">
+        <h1 class="text-center">How You Can Get Involved</h1>
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-6 justify-content-center align-self-center">
+                    <img class="img-fluid" src="https://myhealthnet.uk/wp-content/uploads/2023/01/donation-980x979.webp" />
+                </div>
+                <div class="col-md-6 card">
+                    @using (Html.BeginForm("CreateCheckoutSession", "Home", FormMethod.Post))
+                    {
+                        <div class="custom-form donate-form" role="form">
+                            <h3 class="mb-4 text-center text-dark">Make a donation</h3>
+
+                            <div class="row">
+                                <div class="col-lg-12 col-12">
+                                    <h5 class="mb-3">Donation Frequency</h5>
+                                </div>
+
+                                <div class="col-lg-12 col-12 form-check-group form-check-group-donation-frequency">
+                                    <div class="form-check form-check-radio">
+                                        <input class="form-check-input" type="radio" name="DonationFrequency"
+                                           id="DonationFrequencyOne" checked>
+
+                                        <label class="form-check-label" for="DonationFrequencyOne">
+                                            One Time
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12 col-12 form-check-group">
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon1">$</span>
+
+                                        <input type="text" class="form-control" id="txtpayment" placeholder="Custom amount"
+                                           aria-label="Username" name="Amount" required aria-describedby="basic-addon1">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12 col-12">
+                                    <h5 class="mt-1">Personal Info</h5>
+                                </div>
+
+                                <div class="col-lg-6 col-12 mt-2">
+                                    <input type="text" name="Name" id="txtdonationname" class="form-control"
+                                       placeholder="Jack Doe" required>
+                                </div>
+
+                                <div class="col-lg-6 col-12 mt-2">
+                                    <input type="email" name="Email" id="donation-email"
+                                       class="form-control" placeholder="Jackdoe@gmail.com"
+                                       required>
+                                </div>
+
+                                <div class="col-lg-12 col-12 mt-2">
+                                    <input type="submit" class="form-control mt-4" />
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="volunteer-section section-padding" id="section_4">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-6 col-12">
+                    <h2 class="text-white mb-4">Volunteer</h2>
+
+                    <form class="custom-form volunteer-form mb-5 mb-lg-0" action="#" method="post" role="form">
+                        <h3 class="mb-4">Become a volunteer today</h3>
+
+                        <div class="row">
+                            <div class="col-lg-6 col-12">
+                                <input type="text" name="volunteer-name" id="volunteer-name" class="form-control"
+                                       placeholder="Jack Doe" required>
+                            </div>
+
+                            <div class="col-lg-6 col-12">
+                                <input type="email" name="volunteer-email" id="volunteer-email"
+                                       class="form-control" placeholder="Jackdoe@gmail.com"
+                                       required>
+                            </div>
+
+                            <div class="col-lg-6 col-12">
+                                <input type="text" name="volunteer-subject" id="volunteer-subject"
+                                       class="form-control" placeholder="Subject" required>
+                            </div>
+
+                            <div class="col-lg-6 col-12">
+                                <div class="input-group input-group-file">
+                                    <input type="file" class="form-control" id="inputGroupFile02">
+
+                                    <label class="input-group-text" for="inputGroupFile02">Upload your CV</label>
+
+                                    <i class="bi-cloud-arrow-up ms-auto"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <textarea name="volunteer-message" rows="3" class="form-control" id="volunteer-message"
+                                  placeholder="Comment (Optional)"></textarea>
+
+                        <button type="submit" class="form-control">Submit</button>
+                    </form>
+                </div>
+
+                <div class="col-lg-6 col-12">
+                    <img src="~/images/smiling-casual-woman-dressed-volunteer-t-shirt-with-badge.jpg"
+                         class="volunteer-image img-fluid" alt="">
+
+                    <div class="custom-block-body text-center">
+                        <h4 class="text-white mt-lg-3 mb-lg-3">About Volunteering</h4>
+
+                        <p class="text-white">
+                            Lorem Ipsum dolor sit amet, consectetur adipsicing kengan omeg kohm
+                            tokito Professional charity theme based
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section service section-padding" id="section_6">
+        <h1 class="text-center">Get in Touch</h1>
+
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-4 col-12 ms-auto mb-5 mb-lg-0">
+                    <div class="contact-info-wrap">
+
+                        <div class="contact-image-wrap d-flex flex-wrap">
+                            <img src="images/avatar/pretty-blonde-woman-wearing-white-t-shirt.jpg"
+                                 class="img-fluid avatar-image" alt="">
+
+                            <div class="d-flex flex-column justify-content-center ms-3">
+                                <p class="mb-0">Clara Barton</p>
+                                <p class="mb-0"><strong>HR & Office Manager</strong></p>
+                            </div>
+                        </div>
+
+                        <div class="contact-info">
+
+                            <p class="d-flex mb-2">
+                                <i class="bi-geo-alt me-2"></i>
+                                Akershusstranda 20, 0150 Oslo, Norway
+                            </p>
+
+                            <p class="d-flex mb-2">
+                                <i class="bi-telephone me-2"></i>
+
+                                <a href="tel: 305-240-9671">
+                                    305-240-9671
+                                </a>
+                            </p>
+
+                            <p class="d-flex">
+                                <i class="bi-envelope me-2"></i>
+
+                                <a href="mailto:info@yourgmail.com">
+                                    donate@charity.org
+                                </a>
+                            </p>
+
+                            <a href="#" class="custom-btn btn mt-3">Get Direction</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-5 col-12 mx-auto">
+                    <form class="custom-form contact-form" action="#" method="post" role="form">
+                        <p class="mb-4">
+                            Or, you can just send an email:
+                            <a href="#">info@charity.org</a>
+                        </p>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-12">
+                                <input type="text" name="first-name" id="first-name" class="form-control"
+                                       placeholder="Jack" required>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-12">
+                                <input type="text" name="last-name" id="last-name" class="form-control"
+                                       placeholder="Doe" required>
+                            </div>
+                        </div>
+
+                        <input type="email" name="email" id="email" class="form-control"
+                               placeholder="Jackdoe@gmail.com" required>
+
+                        <textarea name="message" rows="5" class="form-control" id="message"
+                                  placeholder="What can we help you?"></textarea>
+
+                        <button type="submit" class="form-control">Send Message</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function myFunction(element, color) {
+         document.getElementById("ServiceContent").innerHTML="Whatever text!";
+         }
+
+         function myFunction1(element, color) {
+         document.getElementById("ServiceContent").innerHTML="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minima neque voluptatibus debitis officiis amet asperiores, doloribus ut dicta delectus. In dolorem aspernatur voluptatem sunt et, magnam nemo est autem dignissimos.";
+         }
+
+         function myFunction2(element, color) {
+         document.getElementById("ServiceContent").innerHTML="Whatever text!";
+         }
+
+         function myFunction3(element, color) {
+         document.getElementById("ServiceContent").innerHTML="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minima neque voluptatibus debitis officiis amet asperiores, doloribus ut dicta delectus. In dolorem aspernatur voluptatem sunt et, magnam nemo est autem dignissimos.";
+         }
+
+         function myFunction4(element, color) {
+         document.getElementById("ServiceContent").innerHTML="Whatever text!";
+         }
+    </script>
+
+</body>
+</html>

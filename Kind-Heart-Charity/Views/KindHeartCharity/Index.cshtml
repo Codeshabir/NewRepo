@@ -1,0 +1,156 @@
+﻿@model List<Kind_Heart_Charity.Models.PagePost>;
+@{
+    ViewBag.Title = "DynamicPages";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .card {
+        width: 300px;
+        height: 400px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: transform 0.3s ease-in-out;
+    }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #666;
+            font-size: 14px;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+    .btn {
+        display: inline-block;
+        background-color: #7b0781;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 4px;
+        text-decoration: none;
+        margin-top: 20px;
+    }
+
+    .container {
+       margin: auto;
+       margin-top: 30px;
+    }
+
+    
+    
+  
+
+    .card-item {
+        flex-basis: 30%;
+        margin-bottom: 20px;
+    }
+
+</style>
+@{
+    //foreach (var item in Model)
+    //{
+    //    <div class="card">
+    //        <img src=@item.PostThumbnail alt="Card Image">
+    //        <div class="card-content">
+    //            <h3 class="card-title">@item.PostTitle</h3>
+    //            <a class="card-link" href="@item.ID">Read More</a>
+    //        </div>
+            //    </div>
+    //}
+
+
+    //<div class="card-container">
+    //    @{
+    //        foreach (var item in Model)
+    //        {
+    //            if (!item.IsDeleted) // Add this condition to check if the post is not deleted
+    //            {
+    //                <div class="card-item">
+    //                    <div class="card">
+    //                    <img src=@item.PostThumbnail alt="Profile Picture">
+    //                    <center>
+    //                    <h3>@item.PostTitle</h3>
+    //                    </center>
+    //                    <a class="btn" href="/KindHeartCharity/PostDetails?postID=@item.ID">Read More</a>
+    //                </div>
+    //            </div>
+    //            }
+    //        }
+    //}
+
+    //    <div id="editor">This is some sample content.</div>
+
+
+      
+        
+    //</div>
+
+
+
+
+
+    
+<div class="container-fluid">
+    <div class="row">
+        @{
+            int count = 0;
+            foreach (var item in Model)
+            {
+                if (!item.IsDeleted) // Add this condition to check if the post is not deleted
+                {
+                    if (count % 3 == 0)
+                    {
+                        @:</div><div class="row"> 
+                    }
+
+                    <div class="col-md-4">
+                        <div class="card-item">
+                            <div class="card">
+                                <img src="@item.PostThumbnail" alt="Profile Picture">
+                                <center>
+                                    <h5>@item.PostTitle</h5>
+                                </center>
+                                <a class="btn btn-success" href="/KindHeartCharity/PostDetails?postID=@item.ID">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    count++;
+                }
+            }
+        }
+    </div>
+</div>
+
+
+
+
+   
+    
+
+}
+
+
+

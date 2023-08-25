@@ -1,0 +1,19 @@
+﻿@model List<CartItem>
+@{
+    ViewBag.Title = "DynamicPages";
+    Layout = "~/Views/Shared/Navbar.cshtml";
+}
+
+<h2>Cart Items</h2>
+
+
+@if (Model != null)
+{
+    <ul id="CartItems">
+        @foreach (var element in Model)
+        {
+            <li>@element.productId (@element.quantity)</li>
+        }
+    </ul>
+    }
+

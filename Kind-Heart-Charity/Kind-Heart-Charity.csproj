@@ -1,0 +1,161 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>Kind_Heart_Charity</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\Authentication.cs" />
+    <Compile Remove="Models\Authentication\AuthenticationMiddleware.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Views\Shared\_CkeditorScriptPartial.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.20" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.20" />
+    <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.9">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.13" />
+    <PackageReference Include="Stripe.net" Version="41.12.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.10" />
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Views\Home %28copy%29\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\.editorconfig" />
+    <None Include="Views\Shared\_CkeditorScriptPartial.cshtml" />
+    <None Include="wwwroot\ckeditor5-build-classic\ckeditor.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\ckeditor.js.map" />
+    <None Include="wwwroot\ckeditor5-build-classic\LICENSE.md" />
+    <None Include="wwwroot\ckeditor5-build-classic\README.md" />
+    <None Include="wwwroot\ckeditor5-build-classic\sample\img\github.svg" />
+    <None Include="wwwroot\ckeditor5-build-classic\sample\img\logo.svg" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\af.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\ar.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\ast.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\az.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\bg.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\bn.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\bs.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\ca.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\cs.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\da.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\de-ch.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\de.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\el.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\en-au.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\en-gb.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\eo.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\es-co.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\es.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\et.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\eu.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\fa.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\fi.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\fr.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\gl.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\gu.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\he.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\hi.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\hr.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\hu.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\id.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\it.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\ja.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\jv.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\km.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\kn.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\ko.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\ku.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\lt.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\lv.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\ms.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\nb.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\ne.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\nl.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\no.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\oc.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\pl.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\pt-br.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\pt.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\ro.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\ru.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\si.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\sk.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\sl.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\sq.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\sr-latn.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\sr.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\sv.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\th.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\tk.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\tr.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\tt.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\ug.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\uk.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\ur.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\uz.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\vi.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\zh-cn.js" />
+    <None Include="wwwroot\ckeditor5-build-classic\translations\zh.js" />
+    <None Include="wwwroot\js\tinymce\icons\default\icons.min.js" />
+    <None Include="wwwroot\js\tinymce\langs\README.md" />
+    <None Include="wwwroot\js\tinymce\models\dom\model.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\advlist\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\anchor\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\autolink\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\autoresize\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\autosave\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\charmap\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\codesample\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\code\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\directionality\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\emoticons\js\emojiimages.js" />
+    <None Include="wwwroot\js\tinymce\plugins\emoticons\js\emojiimages.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\emoticons\js\emojis.js" />
+    <None Include="wwwroot\js\tinymce\plugins\emoticons\js\emojis.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\emoticons\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\fullscreen\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\help\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\image\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\importcss\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\insertdatetime\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\link\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\lists\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\media\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\nonbreaking\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\pagebreak\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\preview\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\quickbars\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\save\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\searchreplace\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\table\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\template\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\visualblocks\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\visualchars\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\wordcount\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\themes\silver\theme.min.js" />
+    <None Include="wwwroot\js\tinymce\tinymce.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="wwwroot\ckeditor5-build-classic\ckeditor.d.ts" />
+    <TypeScriptCompile Include="wwwroot\js\tinymce\tinymce.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="wwwroot\images\product_images\" />
+  </ItemGroup>
+</Project>

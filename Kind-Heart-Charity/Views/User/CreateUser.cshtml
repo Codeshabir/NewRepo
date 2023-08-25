@@ -1,0 +1,133 @@
+﻿@model UserWithRoleDTO
+@{
+    ViewBag.Title = "Create Role";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+<h1>Create User</h1>
+
+
+
+
+
+
+       
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <!-- left column -->
+                        <div class="col-md-12">
+                            <!-- jquery validation -->
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Create Role</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <!-- form start -->
+                                <form asp-action="CreateUser" asp-controller="User">
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label asp-for="UserName">UserName</label>
+                                            <input asp-for="UserName" type="text" class="form-control" placeholder="Enter UserName">
+                                            <span asp-validation-for="UserName" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="Email">Email</label>
+                                            <input asp-for="Email" type="Email" class="form-control" placeholder="Enter Email">
+                                            <span asp-validation-for="Email" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="Password">Rights</label>
+                                            <input asp-for="Password" type="password" class="form-control" placeholder="Enter Password" >
+                                        </div>
+
+                                         <div class="form-group">
+                                            <label asp-for="SelectedRole">Select Role: </label>
+                                            <select asp-for="SelectedRole" class="form-control">
+                                                <option value="" >Select a Role</option>
+                                                    @foreach(var roles in ViewBag.Roles)
+                                                    {
+                                                        <option value="@roles.Name">@roles.Name</option>
+                                                    }
+
+                                                
+                                              </select>
+                                            <span asp-validation-for="SelectedRole" class="text-danger"></span>
+                                        </div>
+                                      @*  <div class="form-group mb-0">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" name="terms" class="custom-control-input" id="exampleCheck1">
+                                                <label class="custom-control-label" for="exampleCheck1">I agree to the <a href="#">terms of service</a>.</label>
+                                            </div>
+                                        </div>*@
+                                    </div>
+                                    <!-- /.card-body -->
+                                    <div class="card-footer">
+                                        <button type="submit" class="btn btn-primary">Create User</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                        <!--/.col (left) -->
+                        <!-- right column -->
+                        <div class="col-md-6">
+                        </div>
+                        <!--/.col (right) -->
+                    </div>
+                    <!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </section>
+            <!-- /.content -->
+      
+      
+
+
+    <script>
+        $(function () {
+            $.validator.setDefaults({
+                submitHandler: function () {
+                    alert("Form successful submitted!");
+                }
+            });
+            $('#quickForm').validate({
+                rules: {
+                    email: {
+                        required: true,
+                        email: true,
+                    },
+                    password: {
+                        required: true,
+                        minlength: 5
+                    },
+                    terms: {
+                        required: true
+                    },
+                },
+                messages: {
+                    email: {
+                        required: "Please enter a email address",
+                        email: "Please enter a valid email address"
+                    },
+                    password: {
+                        required: "Please provide a password",
+                        minlength: "Your password must be at least 5 characters long"
+                    },
+                    terms: "Please accept our terms"
+                },
+                errorElement: 'span',
+                errorPlacement: function (error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
+                },
+                highlight: function (element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                }
+            });
+        });
+    </script>
+
