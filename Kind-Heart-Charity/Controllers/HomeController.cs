@@ -84,9 +84,13 @@ namespace Kind_Heart_Charity.Controllers
 
         public IActionResult SubscribePackage(string package, decimal? amount)
         {
-            StripeConfiguration.ApiKey = "sk_test_51N6bLAHOKzeMSUnWfEjZk3rYbqrwBCjmkRsCYtbnv3CjqNuZuCyVJvR6ZDtgTJIcmJcZprkV6HC2KQz6lW2xGrYZ00h6QMSO3T";
-
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Signin", "Authentication"); // Replace with actual login action and controller
+            }
+            StripeConfiguration.ApiKey = "sk_test_51NgBVDEPVS0RJPUBKZmvKus2rWpb7O1wJgHYR0qLL8mSBCPMmQey1lFGOQtUEgzTmwO3a6EwdqGVhUK31GIm8lRl00s9r92m01";
             string username = User.Identity.Name;
+
             DateTime currentDate = DateTime.Now;
             var options = new PriceCreateOptions
             {
@@ -94,7 +98,7 @@ namespace Kind_Heart_Charity.Controllers
                 Currency = "usd",
                 ProductData = new PriceProductDataOptions
                 {
-                    Name = "abc"
+                    Name = package
                 }
             };
 
@@ -117,7 +121,7 @@ namespace Kind_Heart_Charity.Controllers
                     },
                 },
                 Mode = "payment",
-                SuccessUrl = DomainName + "PaymentConfirmation?Name=" + username + "&Package=" + package + "&Amount=" + amount + "",
+                SuccessUrl = DomainName + "PaymentConfirmation?Package=" + package + "&Amount=" + amount + "",
                 CancelUrl = DomainName + "Index",
             };
 
@@ -128,8 +132,9 @@ namespace Kind_Heart_Charity.Controllers
             return Redirect(session.Url);
         }
 
-        public async Task<IActionResult> PaymentConfirmation(string username, string package, string amount)
+        public async Task<IActionResult> PaymentConfirmation(string package, string amount)
         {
+            string username = User.Identity.Name;
             Payments payments = new Payments(username, package, amount, 0, 0);
 
             if (ModelState.IsValid)
@@ -163,7 +168,7 @@ namespace Kind_Heart_Charity.Controllers
         {
             // Configure your Gmail account
             string gmailUsername = "shabirhussain.6122@gmail.com";
-            string gmailPassword = "Mandhwani536@";
+            string gmailPassword = "@";
 
             // Set up the SMTP client
             var smtpClient = new SmtpClient("smtp.gmail.com")

@@ -20,7 +20,7 @@ namespace Kind_Heart_Charity.Models
         }
 
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string? Name { get; set; }
         public string Package { get; set; }
         public string Amount { get; set; }
         public byte IsActive { get; set; }

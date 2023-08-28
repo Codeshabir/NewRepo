@@ -26,13 +26,7 @@ namespace Kind_Heart_Charity.Controllers
         [Authorize]
         public IActionResult Dashboard()
         {
-            List<DynamicPagesDBDTO> data = new List<DynamicPagesDBDTO>();
-            _context.DynamicPages
-                .Where(x => x.IsDeleted == false)
-                .ToList()
-                .ForEach(x => data.Add(new DynamicPagesDBDTO() { Id = x.Id, PageName = x.PageName, SectionName = x.SectionName }));
-
-            ViewBag.DynamicPages = data;
+            
             return View();
         }
 
