@@ -168,7 +168,7 @@ namespace Kind_Heart_Charity.Controllers
         {
             // Configure your Gmail account
             string gmailUsername = "shabirhussain.6122@gmail.com";
-            string gmailPassword = "@";
+            string gmailPassword = "hjzffrebuonaggii";
 
             // Set up the SMTP client
             var smtpClient = new SmtpClient("smtp.gmail.com")
@@ -187,14 +187,14 @@ namespace Kind_Heart_Charity.Controllers
 
             try
             {
-                // Send the email
+                // Send the email asynchronously
                 await smtpClient.SendMailAsync(mailMessage);
                 return RedirectToAction("Index", "Home"); // Redirect to a success page
             }
-            catch
+            catch (Exception ex)
             {
-                // Handle errors and redirect to an error page
-                return RedirectToAction("Error", "Home");
+                Console.WriteLine("Error sending email: " + ex.Message);
+                return RedirectToAction("Error", "Home", new { errorMessage = ex.Message });
             }
 
 
