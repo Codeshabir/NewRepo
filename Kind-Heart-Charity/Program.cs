@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Stripe;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +23,16 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     {
         options.LoginPath = "/Authentication/Signin/"; // Update this path to your login page
     });
+
+
+//builder.Services.AddAuthentication()
+//   .AddFacebook(options =>
+//   {
+//       options.AppId = "313166984588794"; // Your Facebook App ID
+//       options.AppSecret = "2361755ce4844cee6cf3e871e96d3df5"; // Your Facebook App Secret
+//   });
+
+
 
 builder.Services.AddSession(options =>
 {

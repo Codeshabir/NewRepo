@@ -12,6 +12,7 @@ using Kind_Heart_Charity.Models.Mailing;
 using System.Text;
 using System.Net.Mail;
 using System.Net;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Kind_Heart_Charity.Controllers
 {
@@ -164,8 +165,11 @@ namespace Kind_Heart_Charity.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> SendMessage(string name, string email, string message)
+        public async Task<IActionResult> SendMessage([FromBody] MessageModel messageModel)
         {
+            string name = messageModel.Name;
+            string email = messageModel.Email;
+            string message = messageModel.Message;
             // Configure your Gmail account
             string gmailUsername = "shabirhussain.6122@gmail.com";
             string gmailPassword = "hjzffrebuonaggii";
@@ -189,12 +193,13 @@ namespace Kind_Heart_Charity.Controllers
             {
                 // Send the email asynchronously
                 await smtpClient.SendMailAsync(mailMessage);
-                return RedirectToAction("Index", "Home"); // Redirect to a success page
+
+                return Json(new { success = true });
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Error sending email: " + ex.Message);
-                return RedirectToAction("Error", "Home", new { errorMessage = ex.Message });
+                return Json(new { success = false, message = "An error occurred while sending the email." });
             }
 
 

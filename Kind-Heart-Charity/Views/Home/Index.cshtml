@@ -460,13 +460,12 @@
             <div class="contact-form">
               <!-- <div class="backdrop"></div> -->
                             <div class="row">
-                <form asp-action="SendMessage">
                   <div class="col-md-6 mb-2 mb-md-0">
                     <div class="form-group">
                       <input
                         type="text"
                         class="form-control text-white bg-dark shadow-none"
-                                                   id="name"
+                                                   id="contactname"
                                                    name="name"
                         placeholder="Your Name"
                       />
@@ -476,18 +475,17 @@
                     <input
                       type="email"
                       class="form-control text-white bg-dark shadow-none"
-                                               id="email"
+                                       id="contactemail"
                                                name="email"
                       placeholder="Your Email"
                     />
                   </div>
                   <div class="col-12 mt-4">
-                                        <textarea name="message" id="message" cols="5" rows="10" class="form-control text-white bg-dark" placeholder="Your Message..."></textarea>
+                                        <textarea name="message" id="contactmessage" cols="5" rows="10" class="form-control text-white bg-dark" placeholder="Your Message..."></textarea>
                   </div>
                   <div class="col-md-12">
-                    <button type="submit" class="video-btn mt-4 ms-0" style="z-index:5">Send Message Now</button>
+                                <button type="button" id="sendMessageBtn" class="video-btn mt-4 ms-0" style="z-index:5">Send Message Now</button>
                   </div>
-                </form>
               
                 </div>
 
@@ -500,6 +498,23 @@
           </div>
           </div>
         </div>
+
+            <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="successModalLabel">Success!</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Email sent successfully!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         <div class="copyright">
           <p class="mt-4 text-uppercase text-white text-center">&copy; copyright 2023 By DissonanceAi</p>
         </div>
@@ -507,4 +522,45 @@
     </section>
   </section>
 
-  
+
+
+
+<script>
+
+    document.getElementById('sendMessageBtn').addEventListener('click', function () {
+        debugger
+        const name = document.getElementById('contactname').value;
+        const email = document.getElementById('contactemail').value;
+        const message = document.getElementById('contactmessage').value;
+
+        const data = {
+            name: name,
+            email: email,
+            message: message
+        };
+
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'Home/SendMessage', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                const response = JSON.parse(xhr.responseText);
+                if (response.success) {
+                    // Show the success modal
+                    $('#successModal').modal('show');
+                } else {
+                    // Handle error if needed
+                    console.error(response.message);
+                }
+            } else {
+                // Handle error if needed
+                console.error('Request failed with status:', xhr.status);
+            }
+        };
+
+        xhr.send(JSON.stringify(data));
+    });
+
+
+</script>

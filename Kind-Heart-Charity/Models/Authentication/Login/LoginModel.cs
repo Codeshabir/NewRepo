@@ -9,5 +9,10 @@ namespace Kind_Heart_Charity.Models.Authentication.Login
 
         [Required(ErrorMessage = "Password is Required")]
         public string? Password { get; set; }
+
+        public string? ReturnUrl { get; set; }
+
+        public string? LoginProvider { get; set; }
+       
     }
 }
