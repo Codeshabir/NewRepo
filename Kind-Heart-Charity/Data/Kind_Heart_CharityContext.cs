@@ -25,6 +25,7 @@ namespace Kind_Heart_Charity.Data
         public DbSet<ProductImage> ProductImage { get; set; }
         public DbSet<MailingList> MailingLists { get; set; }
 
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

@@ -8,16 +8,23 @@ using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using Kind_Heart_Charity.Models.Authentication.FacebookAuth;
 using Facebook;
+using Microsoft.EntityFrameworkCore;
+using Kind_Heart_Charity.Data;
+using Kind_Heart_Charity.Models;
 
 public class AuthenticationController : Controller
 {
     private readonly UserManager<IdentityUser> _userManager;
     private readonly SignInManager<IdentityUser> _signInManager;
+    private readonly RoleManager<IdentityRole> _roleManager;
+    private readonly Kind_Heart_CharityContext _context;
 
-    public AuthenticationController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+    public AuthenticationController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, Kind_Heart_CharityContext context, RoleManager<IdentityRole> roleManager)
     {
         _userManager = userManager;
         _signInManager = signInManager;
+        _context = context;
+        _roleManager = roleManager; 
     }
 
     // GET: Authentication/Signin
@@ -60,6 +67,23 @@ public class AuthenticationController : Controller
         return RedirectToAction("Signin");
     }
 
+    //[HttpPost]
+    //[ValidateAntiForgeryToken]
+    //public async Task<IActionResult> Signin(LoginModel model)
+    //{
+    //    if (ModelState.IsValid)
+    //    {
+    //        var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
+    //        if (result.Succeeded)
+    //        {
+    //            return RedirectToAction("Dashboard", "Dashboard"); // Redirect to dashboard on successful login
+    //        }
+    //        ModelState.AddModelError("", "Invalid login attempt");
+    //    }
+    //    return View(model);
+    //}
+
+
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Signin(LoginModel model)
@@ -69,12 +93,28 @@ public class AuthenticationController : Controller
             var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
             if (result.Succeeded)
             {
-                return RedirectToAction("Dashboard", "Dashboard"); // Redirect to dashboard on successful login
+                var user = await _userManager.FindByEmailAsync(model.Email);
+                var userid = user.Id;
+                var roleIdToCheck = "eb1b091f-688e-4727-b8c7-29c1ea79e6f0"; // Replace with the role ID to check
+                var userroles = _context.UserRoles.ToList();
+                // Check if the user has the specified role ID
+                var userHasRole = _context.UserRoles.Any(ur => ur.UserId == userid && ur.RoleId == roleIdToCheck);
+
+                // Check if the user has the "admin" role by comparing role IDs
+                if (userHasRole) // Replace with the actual admin role ID
+                {
+                    return RedirectToAction("Dashboard", "Dashboard");
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home"); // Redirect to home for non-admin users
+                }
             }
             ModelState.AddModelError("", "Invalid login attempt");
         }
         return View(model);
     }
+
 
     // GET: Authentication/Signup
     public IActionResult Signup()
@@ -84,16 +124,24 @@ public class AuthenticationController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Signup(RegisterUser model)
+    public async Task<IActionResult> Signup(UserWithRoleDTO model)
     {
+        model.SelectedRole = "User";
         if (ModelState.IsValid)
         {
             var user = new IdentityUser { UserName = model.Email, Email = model.Email };
             var result = await _userManager.CreateAsync(user, model.Password);
+          
             if (result.Succeeded)
             {
                 await _signInManager.SignInAsync(user, isPersistent: false); // Automatically sign in the user after registration
-                return RedirectToAction(nameof(Signin)); // Redirect to signin page after successful registration
+
+                if (!string.IsNullOrEmpty(model.SelectedRole))
+                {
+                    await _userManager.AddToRoleAsync(user, model.SelectedRole);
+                }
+
+                return RedirectToAction("Signin");
             }
             foreach (var error in result.Errors)
             {

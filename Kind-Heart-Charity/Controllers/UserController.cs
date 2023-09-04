@@ -55,14 +55,15 @@ namespace Kind_Heart_Charity.Controllers
             return View();
         }
 
+
+
         [HttpPost]
         public async Task<IActionResult> CreateUser(UserWithRoleDTO model)
         {
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser { UserName = model.UserName };
+                var user = new IdentityUser { UserName = model.Email, Email = model.Email };
                 var result = await _userManager.CreateAsync(user, model.Password);
-
                 if (result.Succeeded)
                 {
                     if (!string.IsNullOrEmpty(model.SelectedRole))
@@ -70,18 +71,53 @@ namespace Kind_Heart_Charity.Controllers
                         await _userManager.AddToRoleAsync(user, model.SelectedRole);
                     }
 
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction("GetUsers");
                 }
                 foreach (var error in result.Errors)
                 {
-                    ModelState.AddModelError(string.Empty, error.Description);
+                    ModelState.AddModelError("", error.Description);
                 }
             }
-
             var roles = _roleManager.Roles.ToList();
             ViewBag.Roles = roles;
             return View(model);
+
+
         }
+
+
+        //[HttpPost]
+        //public async Task<IActionResult> CreateUser(UserWithRoleDTO model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var user = new IdentityUser
+        //        {
+        //            UserName = model.UserName,
+        //            Email = model.Email // Set the email address here
+        //        };
+
+        //        var result = await _userManager.CreateAsync(user, model.Password);
+
+        //        if (result.Succeeded)
+        //        {
+        //            if (!string.IsNullOrEmpty(model.SelectedRole))
+        //            {
+        //                await _userManager.AddToRoleAsync(user, model.SelectedRole);
+        //            }
+
+        //            return RedirectToAction(nameof(Index));
+        //        }
+        //        foreach (var error in result.Errors)
+        //        {
+        //            ModelState.AddModelError(string.Empty, error.Description);
+        //        }
+        //    }
+
+        //    var roles = _roleManager.Roles.ToList();
+        //    ViewBag.Roles = roles;
+        //    return View(model);
+        //}
 
         // Add Edit, Delete, and Details actions similar to Create
 
